@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROT13 Decoder</title>
+    <script>
+        function decodeRot13() {
+            var encodedText = document.getElementById("encoded-text").value;
+            var decodedText = "";
+
+            for (var i = 0; i < encodedText.length; i++) {
+                var charCode = encodedText.charCodeAt(i);
+
+                if ('a'.charCodeAt(0) <= charCode && charCode <= 'z'.charCodeAt(0)) {
+                    decodedText += String.fromCharCode(((charCode - 'a'.charCodeAt(0) + 13) % 26) + 'a'.charCodeAt(0));
+                } else if ('A'.charCodeAt(0) <= charCode && charCode <= 'Z'.charCodeAt(0)) {
+                    decodedText += String.fromCharCode(((charCode - 'A'.charCodeAt(0) + 13) % 26) + 'A'.charCodeAt(0));
+                } else {
+                    decodedText += encodedText[i];
+                }
+            }
+
+            document.getElementById("decoded-text").value = decodedText;
+        }
+    </script>
+</head>
+<body>
+    <h1>ROT13 Decoder</h1>
+    <label for="encoded-text">Enter ROT13 Encoded Text:</label><br>
+    <textarea id="encoded-text" rows="4" cols="50"></textarea><br>
+    <button onclick="decodeRot13()">Decode</button><br>
+    <label for="decoded-text">Decoded Text:</label><br>
+    <textarea id="decoded-text" rows="4" cols="50" readonly></textarea>
+</body>
+</html>
+
